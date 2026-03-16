@@ -1,6 +1,6 @@
 {
 	"name": "@yabbal/suno-sdk",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"description": "TypeScript SDK for Suno API",
 	"type": "module",
 	"main": "./dist/index.js",
@@ -37,7 +37,6 @@
 		"directory": "packages/suno-sdk"
 	},
 	"publishConfig": {
-		"provenance": true,
 		"access": "public"
 	},
 	"homepage": "https://github.com/yabbal/suno#readme",
