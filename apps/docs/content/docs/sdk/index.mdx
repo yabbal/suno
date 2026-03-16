@@ -1,0 +1,155 @@
+---
+title: SDK Reference
+description: TypeScript SDK documentation for Suno
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Overview
+
+The SDK provides a typed TypeScript client for the Suno API. It has **zero runtime dependencies** and uses native `fetch`.
+
+## Installation
+
+```bash
+npm install suno-sdk
+```
+
+## Usage
+
+```ts
+import { SunoClient } from "suno-sdk";
+
+const client = new SunoClient({
+  cookie: process.env.SUNO_COOKIE,
+  // baseURL: "https://studio-api.prod.suno.com",  // optional
+  // retry: 2,                                // optional, default 2
+  // retryDelay: 500,                         // optional, default 500ms
+});
+```
+
+<Callout type="warn">
+  Suno uses cookie-based authentication, not API keys. You need to provide a valid session cookie from your browser.
+</Callout>
+
+## Client Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `cookie` | `string` | required | Suno session cookie for authentication |
+| `baseURL` | `string` | `https://studio-api.prod.suno.com` | API base URL |
+| `retry` | `number` | `2` | Max retries on transient errors |
+| `retryDelay` | `number` | `500` | Delay between retries (ms) |
+
+## Resources
+
+### Songs
+
+```ts
+// Generate a song from a prompt
+const songs = await client.songs.generate({
+  prompt: "A chill lo-fi beat about rainy days",
+});
+
+// Generate with full control (custom mode)
+const custom = await client.songs.generateCustom({
+  prompt: "[Verse]\nWalking through the rain...",
+  tags: "pop, upbeat",
+  title: "Rainy Walk",
+});
+
+// List your songs
+const mySongs = await client.songs.list();
+
+// Get a specific song
+const song = await client.songs.get("song-id");
+
+// Extend a song from a timestamp
+const extended = await client.songs.extend({
+  continue_clip_id: "song-id",
+  continue_at: 120,
+});
+
+// Concatenate song clips
+const concatenated = await client.songs.concat({ clip_id: "song-id" });
+
+// Change visibility
+await client.songs.setVisibility("song-id", { is_public: true });
+```
+
+### Lyrics
+
+```ts
+// Generate lyrics from a prompt
+const lyrics = await client.lyrics.generate({
+  prompt: "A love song about the ocean",
+});
+
+// Get generated lyrics by ID
+const result = await client.lyrics.get("lyrics-id");
+
+// Get time-aligned lyrics for a song
+const aligned = await client.lyrics.aligned("song-id");
+```
+
+### Billing
+
+```ts
+// Get account credits and subscription info
+const billing = await client.billing.info();
+console.log(billing.total_credits_left);
+```
+
+### Stems
+
+```ts
+// Split a song into stems (vocals, drums, bass, etc.)
+const stems = await client.stems.create("song-id");
+```
+
+### Personas
+
+```ts
+// Get a persona
+const persona = await client.personas.get("persona-id");
+```
+
+## TypeScript Types
+
+The SDK exports types for all request and response objects:
+
+```ts
+import type {
+  Clip,
+  GenerateDescriptionParams,
+  GenerateCustomParams,
+  GenerateExtendParams,
+  LyricsGeneration,
+  GenerateLyricsParams,
+  BillingInfo,
+  StemsResponse,
+  Persona,
+} from "suno-sdk";
+```
+
+## Error Handling
+
+```ts
+import { SunoError } from "suno-sdk";
+
+try {
+  await client.songs.get("invalid-id");
+} catch (error) {
+  if (error instanceof SunoError) {
+    console.error(error.status);    // 404
+    console.error(error.endpoint);  // /songs/invalid-id
+    console.error(error.details);   // API error body
+  }
+}
+```
+
+## Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| `SUNO_COOKIE` | Suno session cookie (used by CLI, can also be used with SDK) |

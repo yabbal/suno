@@ -1,0 +1,58 @@
+{
+	"name": "suno-sdk",
+	"version": "0.1.0",
+	"description": "TypeScript SDK for Suno API",
+	"type": "module",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		},
+		"./package.json": "./package.json"
+	},
+	"files": [
+		"dist",
+		"README.md",
+		"LICENSE"
+	],
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"lint": "biome check src/",
+		"format": "biome format --write src/",
+		"typecheck": "tsc",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"prepublishOnly": "pnpm build",
+		"release": "changeset publish"
+	},
+	"keywords": [],
+	"author": "yabbal",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/yabbal/suno.git",
+		"directory": "packages/suno-sdk"
+	},
+	"publishConfig": {
+		"provenance": true,
+		"access": "public"
+	},
+	"homepage": "https://github.com/yabbal/suno#readme",
+	"bugs": {
+		"url": "https://github.com/yabbal/suno/issues"
+	},
+	"engines": {
+		"node": ">=20"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.6",
+		"@types/node": "^25.3.5",
+		"@vitest/coverage-v8": "^4.0.18",
+		"tsup": "^8.5.1",
+		"typescript": "^5.9.3",
+		"vitest": "^4.0.18"
+	}
+}

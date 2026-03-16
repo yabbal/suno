@@ -1,0 +1,59 @@
+name: Update Homebrew
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'CLI version to publish (e.g. 1.0.0)'
+        required: true
+        type: string
+
+jobs:
+  homebrew:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Get version and SHA
+        id: info
+        run: |
+          VERSION="${{ inputs.version }}"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+          URL="https://registry.npmjs.org/suno-cli/-/suno-cli-${VERSION}.tgz"
+          echo "url=$URL" >> $GITHUB_OUTPUT
+
+          # Retry until npm tarball is available (max 5 min)
+          for i in $(seq 1 30); do
+            HTTP_STATUS=$(curl -sL -o /dev/null -w "%{http_code}" "$URL")
+            if [ "$HTTP_STATUS" = "200" ]; then
+              echo "Package available after attempt $i"
+              break
+            fi
+            if [ "$i" = "30" ]; then
+              echo "::error::Package not available after 5 minutes"
+              exit 1
+            fi
+            echo "Attempt $i: HTTP $HTTP_STATUS, retrying in 10s..."
+            sleep 10
+          done
+
+          SHA=$(curl -sL "$URL" | shasum -a 256 | cut -d' ' -f1)
+          echo "sha256=$SHA" >> $GITHUB_OUTPUT
+
+      - name: Update formula with version and SHA
+        run: |
+          sed -i "s|url \".*\"|url \"${{ steps.info.outputs.url }}\"|" homebrew/suno.rb
+          sed -i "s|sha256 \".*\"|sha256 \"${{ steps.info.outputs.sha256 }}\"|" homebrew/suno.rb
+
+      - name: Push formula to tap
+        uses: dmnemec/copy_file_to_another_repo_action@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+        with:
+          source_file: 'homebrew/suno.rb'
+          destination_repo: 'yabbal/homebrew-tap'
+          destination_folder: 'Formula'
+          user_email: 'yabbal@users.noreply.github.com'
+          user_name: 'yabbal'
+          commit_message: 'chore: update suno-cli to ${{ steps.info.outputs.version }}'

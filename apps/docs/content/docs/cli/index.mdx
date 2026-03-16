@@ -1,0 +1,121 @@
+---
+title: CLI Reference
+description: Complete CLI command reference for Suno
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Overview
+
+All commands output JSON by default. Use `--format table` or `--format csv` for alternative formats.
+
+```bash
+suno [command] [subcommand] [options]
+```
+
+## Global Options
+
+| Option | Description |
+|--------|-------------|
+| `--format` | Output format: `json` (default), `table`, `csv` |
+| `--help` | Show help for a command |
+| `--version` | Show CLI version |
+
+## Commands
+
+### auth
+
+Manage authentication. Suno uses an access token extracted from your browser session.
+
+```bash
+suno auth login               # Interactive login (guides you to get the token)
+suno auth status              # Show current auth status
+suno auth logout              # Log out and clear stored token
+```
+
+<Callout type="info">
+  You can also set the `SUNO_COOKIE` environment variable instead of using `auth login`.
+</Callout>
+
+### songs
+
+Generate, list, and manage songs.
+
+```bash
+# Generate a song from a text prompt
+suno songs generate --prompt "A chill lo-fi beat about rainy days"
+
+# Generate with full control (custom mode)
+suno songs custom --lyrics "Verse 1..." --tags "pop, upbeat" --title "My Song"
+
+# List your songs
+suno songs list
+suno songs list --format table
+
+# Get a specific song
+suno songs get --id <song-id>
+
+# Extend a song from a specific timestamp (in seconds)
+suno songs extend --id <song-id> --at 120
+
+# Concatenate song clips
+suno songs concat --id <song-id>
+
+# Change song visibility
+suno songs visibility --id <song-id> --public
+```
+
+### lyrics
+
+Generate and retrieve lyrics.
+
+```bash
+# Generate lyrics from a prompt
+suno lyrics generate --prompt "A love song about the ocean"
+
+# Get generated lyrics by ID
+suno lyrics get --id <lyrics-id>
+
+# Get time-aligned lyrics for a song
+suno lyrics aligned --id <song-id>
+```
+
+### billing
+
+Check your Suno account credits and subscription.
+
+```bash
+suno billing info
+```
+
+### stems
+
+Split a song into individual stems (vocals, drums, bass, etc.).
+
+```bash
+suno stems create --id <song-id>
+```
+
+### personas
+
+Manage Suno personas.
+
+```bash
+suno personas get --id <persona-id>
+```
+
+### completion
+
+Generate shell completion scripts.
+
+```bash
+suno completion --shell zsh    # Zsh completion
+suno completion --shell bash   # Bash completion
+suno completion --shell fish   # Fish completion
+```
+
+### version
+
+```bash
+suno version
+```

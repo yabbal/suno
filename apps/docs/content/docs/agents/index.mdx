@@ -1,0 +1,66 @@
+---
+title: AI Agents
+description: Using Suno CLI with Claude Code and AI agents
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Overview
+
+The Suno CLI is designed to work with AI agents. All commands return structured JSON on stdout, making it easy for LLMs to parse and process the output.
+
+## Install the Skill
+
+```bash
+npx skills add yabbal/suno
+```
+
+## Usage with Claude Code
+
+Once the skill is installed, you can use natural language to interact with Suno:
+
+```
+> generate a chill lo-fi song about rainy days
+> list my recent songs
+> how many credits do I have left?
+> generate lyrics for a love song about the ocean
+> extend song abc123 from the 2-minute mark
+> split song abc123 into stems
+```
+
+## Programmatic Usage
+
+Since all output is JSON, you can pipe commands through `jq`:
+
+```bash
+# Get all song titles
+suno songs list | jq '.clips[].title'
+
+# Count your songs
+suno songs list | jq '.clips | length'
+
+# Get songs with a specific tag
+suno songs list | jq '[.clips[] | select(.metadata.tags | contains("jazz"))]'
+
+# Get remaining credits
+suno billing info | jq '.total_credits_left'
+
+# Get the audio URL of a specific song
+suno songs get --id <song-id> | jq '.audio_url'
+
+# List songs and extract IDs and titles
+suno songs list | jq '.clips[] | {id, title}'
+```
+
+## Environment Variables
+
+For CI/CD or scripted usage:
+
+```bash
+export SUNO_COOKIE="your-suno-cookie-value"
+suno songs list
+```
+
+<Callout type="info">
+  The CLI reads `SUNO_COOKIE` from the environment, so you don't need to run `auth login` in CI.
+</Callout>

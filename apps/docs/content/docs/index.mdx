@@ -1,0 +1,160 @@
+---
+title: Getting Started
+description: Install and configure the Suno CLI/SDK in minutes
+---
+
+import { Cards, Card } from "fumadocs-ui/components/card";
+import { Steps, Step } from "fumadocs-ui/components/steps";
+import { Tabs, Tab } from "fumadocs-ui/components/tabs";
+import { Terminal, Code, Bot, KeyRound } from "lucide-react";
+
+Unofficial TypeScript tools for [Suno](https://suno.com) — AI music generation:
+
+- **`suno-sdk`** — TypeScript SDK to integrate Suno into your applications
+- **`suno-cli`** — CLI to generate music, manage songs, lyrics, and more from the terminal
+
+## Installation
+
+<Tabs items={["SDK", "CLI"]}>
+  <Tab value="SDK">
+    ```bash title="Terminal"
+    npm install suno-sdk
+    ```
+  </Tab>
+  <Tab value="CLI">
+    <Tabs items={["npm", "Homebrew", "Source"]}>
+      <Tab value="npm">
+        ```bash title="Terminal"
+        npm install -g suno-cli
+        ```
+      </Tab>
+      <Tab value="Homebrew">
+        ```bash title="Terminal"
+        brew tap yabbal/tap && brew install suno
+        ```
+      </Tab>
+      <Tab value="Source">
+        ```bash title="Terminal"
+        git clone https://github.com/yabbal/suno.git
+        cd suno && pnpm install && pnpm build
+        pnpm link --global
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+</Tabs>
+
+## Authentication
+
+Suno has no public API. Authentication uses an **access token** extracted from your browser session.
+
+**How to get your token:**
+
+1. Open [suno.com](https://suno.com) in your browser (logged in)
+2. Open DevTools (F12) → **Network** tab
+3. Find any request to `studio-api.prod.suno.com`
+4. Copy the `Authorization` header value (the JWT after `Bearer `)
+
+```bash title="Terminal"
+# Option 1: interactive login (guides you through the steps)
+suno auth login
+
+# Option 2: environment variable
+export SUNO_COOKIE="eyJhbG..."
+```
+
+## Quick Start
+
+<Tabs items={["SDK", "CLI"]}>
+  <Tab value="SDK">
+    <Steps>
+      <Step>
+        ### Configure authentication
+
+        ```bash title="Terminal"
+        export SUNO_COOKIE="your-suno-cookie-value"
+        ```
+      </Step>
+
+      <Step>
+        ### Use the SDK
+
+        ```ts title="app.ts"
+        import { SunoClient } from "suno-sdk";
+
+        const client = new SunoClient({ cookie: process.env.SUNO_COOKIE });
+
+        // Generate a song
+        const songs = await client.songs.generate({ prompt: "A happy jazz song about coding" });
+
+        // List your songs
+        const mySongs = await client.songs.list();
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab value="CLI">
+    <Steps>
+      <Step>
+        ### Log in
+
+        ```bash title="Terminal"
+        suno auth login
+        ```
+      </Step>
+
+      <Step>
+        ### Generate a song
+
+        ```bash title="Terminal"
+        suno songs generate --prompt "A happy jazz song about coding"
+        ```
+      </Step>
+
+      <Step>
+        ### List your songs
+
+        ```bash title="Terminal"
+        suno songs list --format table
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Shell Completion
+
+<Tabs items={["zsh", "bash", "fish"]}>
+  <Tab value="zsh">
+    ```bash title="~/.zshrc"
+    eval "$(suno completion --shell zsh)"
+    ```
+  </Tab>
+  <Tab value="bash">
+    ```bash title="~/.bashrc"
+    eval "$(suno completion --shell bash)"
+    ```
+  </Tab>
+  <Tab value="fish">
+    ```bash title="Terminal"
+    suno completion --shell fish | source
+    ```
+  </Tab>
+</Tabs>
+
+## Explore
+
+<Cards>
+  <Card icon={<Code />} title="SDK" href="/docs/sdk">
+    Typed client with resource classes for songs, lyrics, billing, stems, and personas.
+  </Card>
+  <Card icon={<Terminal />} title="CLI" href="/docs/cli">
+    Commands with JSON/table/CSV output.
+  </Card>
+  <Card icon={<KeyRound />} title="Authentication" href="/docs/cli/auth">
+    Cookie-based authentication and session storage.
+  </Card>
+  <Card icon={<Bot />} title="AI Agents" href="/docs/agents">
+    Skill for Claude Code and automated workflows.
+  </Card>
+</Cards>

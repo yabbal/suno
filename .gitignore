@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.DS_Store
+.next/
+out/
+.source/
+.turbo/
+coverage/
+.env
+.env.local
+.env.*.local
+.agents/
+.claude/

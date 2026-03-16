@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "create-cli": {
+      "source": "yabbal/create-cli",
+      "sourceType": "github",
+      "computedHash": "663421b07d4a7d8ccfd7843746db4c3948d5d9a6bca16692111123ed59009c0c"
+    }
+  }
+}
