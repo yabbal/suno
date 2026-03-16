@@ -20,7 +20,7 @@ jobs:
           VERSION="${{ inputs.version }}"
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-          URL="https://registry.npmjs.org/suno-cli/-/suno-cli-${VERSION}.tgz"
+          URL="https://registry.npmjs.org/@yabbal/suno-cli/-/@yabbal/suno-cli-${VERSION}.tgz"
           echo "url=$URL" >> $GITHUB_OUTPUT
 
           # Retry until npm tarball is available (max 5 min)
@@ -56,4 +56,4 @@ jobs:
           destination_folder: 'Formula'
           user_email: 'yabbal@users.noreply.github.com'
           user_name: 'yabbal'
-          commit_message: 'chore: update suno-cli to ${{ steps.info.outputs.version }}'
+          commit_message: 'chore: update @yabbal/suno-cli to ${{ steps.info.outputs.version }}'

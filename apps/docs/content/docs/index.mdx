@@ -10,22 +10,22 @@ import { Terminal, Code, Bot, KeyRound } from "lucide-react";
 
 Unofficial TypeScript tools for [Suno](https://suno.com) — AI music generation:
 
-- **`suno-sdk`** — TypeScript SDK to integrate Suno into your applications
-- **`suno-cli`** — CLI to generate music, manage songs, lyrics, and more from the terminal
+- **`@yabbal/suno-sdk`** — TypeScript SDK to integrate Suno into your applications
+- **`@yabbal/suno-cli`** — CLI to generate music, manage songs, lyrics, and more from the terminal
 
 ## Installation
 
 <Tabs items={["SDK", "CLI"]}>
   <Tab value="SDK">
     ```bash title="Terminal"
-    npm install suno-sdk
+    npm install @yabbal/suno-sdk
     ```
   </Tab>
   <Tab value="CLI">
     <Tabs items={["npm", "Homebrew", "Source"]}>
       <Tab value="npm">
         ```bash title="Terminal"
-        npm install -g suno-cli
+        npm install -g @yabbal/suno-cli
         ```
       </Tab>
       <Tab value="Homebrew">
@@ -80,7 +80,7 @@ export SUNO_COOKIE="eyJhbG..."
         ### Use the SDK
 
         ```ts title="app.ts"
-        import { SunoClient } from "suno-sdk";
+        import { SunoClient } from "@yabbal/suno-sdk";
 
         const client = new SunoClient({ cookie: process.env.SUNO_COOKIE });
 

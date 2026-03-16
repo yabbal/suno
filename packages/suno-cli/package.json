@@ -1,5 +1,5 @@
 {
-	"name": "suno-cli",
+	"name": "@yabbal/suno-cli",
 	"version": "0.1.0",
 	"description": "CLI for Suno",
 	"type": "module",
@@ -45,7 +45,7 @@
 		"citty": "^0.2.1",
 		"cli-table3": "^0.6.5",
 		"consola": "^3.4.2",
-		"suno-sdk": "workspace:*"
+		"@yabbal/suno-sdk": "workspace:*"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.6",

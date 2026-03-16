@@ -1,5 +1,5 @@
+import { SunoError } from "@yabbal/suno-sdk";
 import Table from "cli-table3";
-import { SunoError } from "suno-sdk";
 
 export type OutputFormat = "json" | "table" | "csv";
 

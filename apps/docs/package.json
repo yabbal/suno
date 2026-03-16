@@ -12,7 +12,7 @@
 		"fumadocs-mdx": "^14.2.9",
 		"fumadocs-ui": "^16.6.13",
 		"lucide-react": "^0.577.0",
-		"suno-cli": "workspace:*",
+		"@yabbal/suno-cli": "workspace:*",
 		"next": "^16.1.6",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0"

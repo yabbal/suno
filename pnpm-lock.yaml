@@ -35,6 +35,9 @@ importers:
 
   apps/docs:
     dependencies:
+      '@yabbal/suno-cli':
+        specifier: workspace:*
+        version: link:../../packages/suno-cli
       fumadocs-core:
         specifier: ^16.6.13
         version: 16.6.17(@mdx-js/mdx@3.1.1)(@types/estree-jsx@1.0.5)(@types/hast@3.0.4)(@types/mdast@4.0.4)(@types/react@19.2.14)(lucide-react@0.577.0(react@19.2.4))(next@16.1.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(zod@4.3.6)
@@ -56,9 +59,6 @@ importers:
       react-dom:
         specifier: ^19.1.0
         version: 19.2.4(react@19.2.4)
-      suno-cli:
-        specifier: workspace:*
-        version: link:../../packages/suno-cli
     devDependencies:
       '@tailwindcss/postcss':
         specifier: ^4.2.1
@@ -87,6 +87,9 @@ importers:
       '@clack/prompts':
         specifier: ^1.1.0
         version: 1.1.0
+      '@yabbal/suno-sdk':
+        specifier: workspace:*
+        version: link:../suno-sdk
       citty:
         specifier: ^0.2.1
         version: 0.2.1
@@ -96,9 +99,6 @@ importers:
       consola:
         specifier: ^3.4.2
         version: 3.4.2
-      suno-sdk:
-        specifier: workspace:*
-        version: link:../suno-sdk
     devDependencies:
       '@biomejs/biome':
         specifier: ^2.4.6

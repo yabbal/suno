@@ -12,13 +12,13 @@ The SDK provides a typed TypeScript client for the Suno API. It has **zero runti
 ## Installation
 
 ```bash
-npm install suno-sdk
+npm install @yabbal/suno-sdk
 ```
 
 ## Usage
 
 ```ts
-import { SunoClient } from "suno-sdk";
+import { SunoClient } from "@yabbal/suno-sdk";
 
 const client = new SunoClient({
   cookie: process.env.SUNO_COOKIE,
@@ -129,13 +129,13 @@ import type {
   BillingInfo,
   StemsResponse,
   Persona,
-} from "suno-sdk";
+} from "@yabbal/suno-sdk";
 ```
 
 ## Error Handling
 
 ```ts
-import { SunoError } from "suno-sdk";
+import { SunoError } from "@yabbal/suno-sdk";
 
 try {
   await client.songs.get("invalid-id");

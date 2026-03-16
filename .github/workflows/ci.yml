@@ -138,7 +138,7 @@ jobs:
       - name: Trigger Homebrew update
         if: steps.changesets.outputs.published == 'true'
         run: |
-          CLI_VERSION=$(echo '${{ steps.changesets.outputs.publishedPackages }}' | jq -r '.[] | select(.name == "suno-cli") | .version')
+          CLI_VERSION=$(echo '${{ steps.changesets.outputs.publishedPackages }}' | jq -r '.[] | select(.name == "@yabbal/suno-cli") | .version')
           if [ -n "$CLI_VERSION" ]; then
             gh workflow run homebrew.yml -f version="$CLI_VERSION"
           fi

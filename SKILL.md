@@ -13,8 +13,8 @@ Triggers on: "suno", "music generation", "ai music", "generate song", "suno api"
 
 ## Prerequisites
 
-- Install the CLI: `pnpm add -g suno-cli`
-- Install the SDK: `pnpm add suno-sdk`
+- Install the CLI: `pnpm add -g @yabbal/suno-cli`
+- Install the SDK: `pnpm add @yabbal/suno-sdk`
 - Set your cookie: `export SUNO_COOKIE=your-cookie` or `suno auth login`
 
 ## Environment Variables

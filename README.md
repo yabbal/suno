@@ -5,8 +5,8 @@
 **Not affiliated with Suno, Inc.**
 
 [![CI](https://github.com/yabbal/suno/actions/workflows/ci.yml/badge.svg)](https://github.com/yabbal/suno/actions/workflows/ci.yml)
-[![npm suno-sdk](https://img.shields.io/npm/v/suno-sdk)](https://www.npmjs.com/package/suno-sdk)
-[![npm suno-cli](https://img.shields.io/npm/v/suno-cli)](https://www.npmjs.com/package/suno-cli)
+[![npm @yabbal/suno-sdk](https://img.shields.io/npm/v/@yabbal/suno-sdk)](https://www.npmjs.com/package/@yabbal/suno-sdk)
+[![npm @yabbal/suno-cli](https://img.shields.io/npm/v/@yabbal/suno-cli)](https://www.npmjs.com/package/@yabbal/suno-cli)
 
 ## Features
 
@@ -25,13 +25,13 @@
 
 ```bash
 # CLI
-npm install -g suno-cli
+npm install -g @yabbal/suno-cli
 
 # Homebrew
 brew tap yabbal/tap && brew install suno
 
 # SDK
-npm install suno-sdk
+npm install @yabbal/suno-sdk
 ```
 
 ## Authentication
@@ -84,11 +84,11 @@ suno stems create --id <song-id>
 ## TypeScript SDK
 
 ```bash
-npm install suno-sdk
+npm install @yabbal/suno-sdk
 ```
 
 ```typescript
-import { SunoClient } from "suno-sdk";
+import { SunoClient } from "@yabbal/suno-sdk";
 
 const client = new SunoClient({ cookie: process.env.SUNO_COOKIE });
 

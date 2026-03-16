@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
-import { SunoClient } from "suno-sdk";
+import { SunoClient } from "@yabbal/suno-sdk";
 
 const CONFIG_DIR = join(
 	process.env.XDG_CONFIG_HOME || join(homedir(), ".config"),
