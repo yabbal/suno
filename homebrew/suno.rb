@@ -1,7 +1,7 @@
 class Suno < Formula
   desc "CLI for Suno — AI music generation"
   homepage "https://github.com/yabbal/suno"
-  url "https://registry.npmjs.org/@yabbal/suno-cli/-/@yabbal/suno-cli-0.1.0.tgz"
+  url "https://registry.npmjs.org/@yabbal/suno-cli/-/suno-cli-0.1.0.tgz"
   sha256 "PLACEHOLDER"
   license "MIT"
 
