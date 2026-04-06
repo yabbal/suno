@@ -47,11 +47,11 @@
 		"@yabbal/suno-sdk": "workspace:*"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.4.6",
-		"@types/node": "^25.3.5",
-		"@vitest/coverage-v8": "^4.0.18",
+		"@biomejs/biome": "^2.4.10",
+		"@types/node": "^25.5.2",
+		"@vitest/coverage-v8": "^4.1.2",
 		"tsup": "^8.5.1",
-		"typescript": "^5.9.3",
-		"vitest": "^4.0.18"
+		"typescript": "^6.0.2",
+		"vitest": "^4.1.2"
 	}
 }
